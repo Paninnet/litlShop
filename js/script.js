@@ -23,11 +23,38 @@ window.addEventListener("DOMContentLoaded", () => {
 
    const renderList = (products) => {
       let goodsList = products.map(item => renderItem(item.img, item.title, item.price)).join(" ")
-      console.log(typeof(goodsList));
       document.querySelector('.goods-list').innerHTML = goodsList
    }
 
    renderList(goods)
+
+   function Person (name, yearOfBirth){
+      this.name = name;
+      this.yearOfBirth = yearOfBirth;
+   }
+   Person.prototype.calc =  function (){
+      return new Date ().getFullYear () - this.yearOfBirth
+   }
+
+   let ilia = new Person ("Ilia", 1999)
+   let ksu = new Person ("Ksenia", 1998)
+   let dime = new Person ("Dima", 2002)
+   console.log(ilia.calc());
+   console.log(ilia);
+   console.log(ksu.calc());
+   console.log(dime.calc());
+
+   function Teacher (name, yearOfBirth, subject){
+      Person.call(this, name, yearOfBirth)
+      this.subject =subject
+   }
+
+   Teacher.prototype = Object.create(Person.prototype)
+   Teacher.prototype.consttuctor = Teacher
+
+   let ma = new Teacher ("Natalia", 1974, "Russian")
+   console.log(ma);
+   console.log(ma.calc());
 
    
 })
