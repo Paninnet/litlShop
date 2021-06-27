@@ -1,0 +1,115 @@
+* {
+   padding: 0;
+   margin: 0;
+   border: 0;
+ }
+ 
+ *, *:before, *:after {
+   box-sizing: border-box;
+ }
+ 
+ :focus, :active {
+   outline: none;
+ }
+ 
+ a:focus, :active {
+   outline: none;
+ }
+ 
+ nav, footer, header, aside {
+   display: block;
+ }
+ 
+ html, body {
+   height: 100%;
+   width: 100%;
+   font-size: 100%;
+   line-height: 1;
+   font-size: 14px;
+   size-adjust: 100%;
+ }
+ 
+ input, button, textarea {
+   font-family: inherit;
+ }
+ 
+ input::ms-clear {
+   display: none;
+ }
+ 
+ button {
+   cursor: pointer;
+ }
+ 
+ button ::moz-focus-inner {
+   padding: 0;
+   border: 0;
+ }
+ 
+ a, a:visited {
+   text-decoration: none;
+ }
+ 
+ a:hover {
+   text-decoration: none;
+ }
+ 
+ img {
+   vertical-align: top;
+ }
+ 
+ * {
+   font-family: 'Lato', sans-serif;
+   font-style: normal;
+   font-weight: normal;
+ }
+ 
+ header{
+   border: 2px solid black;
+   display: flex;
+   justify-content: space-between;
+   margin-bottom: 15px;
+}
+.cart-button{
+   margin: 10px;
+   font-size: 18px;
+   background-color: white;
+   padding: 5px;
+   transition-duration: 0.5s;
+}
+.cart-button:hover{
+   background-color:black;
+   color: white;
+   transition-duration: 0.5s;
+}
+.goods-list{
+   width: 90%;
+   margin: 0 auto;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   flex-wrap: wrap;
+}
+.goods-item{
+   border: 2px solid black;
+   height: 200px;
+   width: 150px;
+   margin: 50px;
+   display: flex;
+   justify-content: space-between;
+   flex-direction: column; 
+}
+img{
+   width: 146px;
+   height: 100px;
+}
+.by-btn{
+   font-size: 14px;
+   padding: 2px;
+   transition-duration: 0.5s;
+}
+.by-btn:hover{
+   background-color:black;
+   color: white;
+   transition-duration: 0.5s;
+}
