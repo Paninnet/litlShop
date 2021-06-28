@@ -28,6 +28,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
    renderList(goods)
 
+   // -------------------------------------------------- ES5
+   
+
    function Person (name, yearOfBirth){
       this.name = name;
       this.yearOfBirth = yearOfBirth;
@@ -55,6 +58,47 @@ window.addEventListener("DOMContentLoaded", () => {
    let ma = new Teacher ("Natalia", 1974, "Russian")
    console.log(ma);
    console.log(ma.calc());
+
+
+   // ---------------------------------------------------- ES6
+   class Car {
+      constructor (marka, horsePower, doors){
+         this.marka = marka;
+         this.horsePower = horsePower
+         this.doors = doors
+      }
+      calcPover(){
+         return this.horsePower * 0.74
+      }
+   }
+
+   class SportCar extends Car {
+      constructor(marka, horsePower, doors, color) {
+         super (marka, horsePower, doors)
+         this.color = color
+      }
+
+      maxSpeed() {
+         return (this.calcPover() * 1.5).toFixed(2)
+      }
+
+      static costInRubls(dollarPrice){
+         return (dollarPrice * 74.5).toFixed(2)
+      }
+   }
+
+   let wv = new Car("VolksWagen", 160, 4 )
+   console.log(wv);
+   console.log(wv.calcPover())
+
+   let porsh = new SportCar("Porshe", 560, 2, "red")
+   console.log(porsh);
+   console.log(porsh.calcPover())
+   console.log(porsh.maxSpeed())
+   //console.log(porsh.costInRubls(20000))
+   console.log(SportCar.costInRubls(200000000)); 
+
+
 
    
 })
