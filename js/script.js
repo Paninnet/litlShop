@@ -1,35 +1,50 @@
 window.addEventListener("DOMContentLoaded", () => {
+   const API = "https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses"
+
+   let getRequest = (url) => {
+      return new Promise((resolve, reject) => {
+         let xht = new XMLHttpRequest()
+         xht.open("GET", url, true)
+         if (xht.readyState === 4) {
+            if (xht.status !== 200) {
+               reject("Erroe")
+            } else {
+               resolve(xht.responseText)
+            }
+         }
+         xht.send()
+      }
+
+      )
+
+   }
+
+
 
    class Catalog {
       constructor(selector = '.goods-list') {
          this.selector = selector
          this._goods = []
          this._allProducts = []
-
-         this._fetchGoods()
-         this._render()
+         
+         this._getGoods().then((data => {
+            this._goods = data
+            this._render()
+         }))
          this.totalPrice()
       }
 
-      _fetchGoods() {
-         this._goods = [
-            { img: "https://cdn1.ozone.ru/multimedia/1026746162.jpg", title: 'Shirt', price: 150 },
-            { img: "http://g02.a.alicdn.com/kf/Hed0566defb014c59b8a73f7ab7d8029aN.jpg", title: 'Socks', price: 50 },
-            { img: "http://nets.shoppinggadget.ru/12525-1-home_default/Джемпер.jpg", title: 'Jacket', price: 350 },
-            { img: "https://i.pinimg.com/736x/61/ec/ec/61ececea0b55767fbeebd64c286d0f56--satin-shoes-silver-heels.jpg", title: 'Shoes', price: 250 },
-            { img: "https://cdn1.ozone.ru/multimedia/1026746162.jpg", title: 'Shirt', price: 150 },
-            { img: "http://g02.a.alicdn.com/kf/Hed0566defb014c59b8a73f7ab7d8029aN.jpg", title: 'Socks', price: 50 },
-            { img: "http://nets.shoppinggadget.ru/12525-1-home_default/Джемпер.jpg", title: 'Jacket', price: 350 },
-            { img: "https://i.pinimg.com/736x/61/ec/ec/61ececea0b55767fbeebd64c286d0f56--satin-shoes-silver-heels.jpg", title: 'Shoes', price: 250 },
+      _getGoods() {
+         return fetch(`${API}/catalogData.json`)
+            .then(result => result.json())
+            .catch(erroe => console.log(erroe))
 
-         ]
       }
 
       _render() {
          let block = document.querySelector(this.selector)
 
          for (let product of this._goods) {
-
 
             let catalogObject = new CatalogItem(product)
 
@@ -39,11 +54,7 @@ window.addEventListener("DOMContentLoaded", () => {
       }
 
       totalPrice() {
-         let total = 0
-         this._goods.forEach( item => {total += item.price})
-         console.log(`Total item's price from _goods =${total}$`); 
-         return total
-         
+         return this._allProducts.reduce((accum, item) => accum += item.price, 0);
       }
 
 
@@ -51,15 +62,15 @@ window.addEventListener("DOMContentLoaded", () => {
 
    class CatalogItem {
       constructor(item) {
-         this.img = item.img;
-         this.title = item.title;
+         this.img = 'https://im0-tub-ru.yandex.net/i?id=ed86bf84e7c282bca09bf60f33c6d6cd&n=13';
+         this.product_name = item.product_name;
          this.price = item.price
       }
-      render () {
+      render() {
          return `<div class="goods-item">
                      <img src =${this.img} alt="Картинка">
-                     <h3 class ="title">${this.title}</h3>
-                     <h3 class ="price">Цена ${this.price}$</h3>
+                     <h3 class ="title">${this.product_name}</h3>
+                     <h3 class ="price">Цена ${this.price} руб</h3>
                      <button class="by-btn">Добавить в корзину</button>
                </div>`;
       }
@@ -68,6 +79,10 @@ window.addEventListener("DOMContentLoaded", () => {
    }
 
    let newCatalog = new Catalog()
+
+
+
+
+
 })
 
-   
